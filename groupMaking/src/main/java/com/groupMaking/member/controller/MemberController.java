@@ -34,16 +34,16 @@ public class MemberController {
 	@RequestMapping(value="/member/signUp1.do", method=RequestMethod.POST)
 	public String submitSignUp(@Valid MemberVO memberVO, BindingResult result, Model model, HttpServletRequest request) {
 		
+		System.out.println("memberController 진입");
 		System.out.println("memberVO : " + memberVO);
-		
 		//유효성 체크 결과 오류가 있으면 폼 호출
-		if(result.hasErrors()) {
-			return homeController.home();
-		}
+		/*
+		 * if(result.hasErrors()) { return homeController.home(); }
+		 */
 		
 		//유효성 체크 결과 오류가 없으면 쿼리작업
 		memberService.insertMember_detail(memberVO);
-		
+		System.out.println("memberVO : " + memberVO);
 		return "index";
 	}
 	

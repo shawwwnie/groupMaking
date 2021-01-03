@@ -13,16 +13,20 @@
 		<ul> 
 			<li>
 				<a>아이디</a>
-				<form:input type="text" class="insertId" name="mem_id" path="mem_id" />
+				<form:input type="text" class="mem_id" name="mem_id" path="mem_id" />
 				<input type="button" class="confirmId" value="중복확인">
 			</li>
 			<li>
 				<a>비밀번호</a>
-				<form:input type="password" class="insertPw" name="mem_pw" path="mem_pw"/>
+				<form:input type="password" class="mem_pw" name="mem_pw" path="mem_pw"/>
 			</li>
 			<li>
 				<a>비밀번호 확인</a>
-				<input type="password" class="insertPw2" name="mem_pw2">
+				<input type="password" class="mem_pw2" name="mem_pw2">
+			</li>
+			<li>
+				<a>이름</a>
+				<form:input type="text" class="mem_name" name="mem_name" path="mem_name" />
 			</li>
 			<li>
 				<a>성별 입력</a>
@@ -35,28 +39,28 @@
 			</li>
 			<li>
 				<a>전화번호</a>
-				<form:input type="text" class="insertPhone" name="mem_phone" placeholder="숫자만 입력하세요" path="mem_phone"/>
+				<form:input type="text" class="mem_phone" name="mem_phone" placeholder="숫자만 입력하세요" path="mem_phone"/>
 			</li>
 			<li>
 				<a>이메일</a>
-				<form:input type="text" class="insertEmail" name="mem_email" path="mem_email"/>
+				<form:input type="text" class="mem_email" name="mem_email" path="mem_email"/>
 			</li>
 			<li>
 				<a>우편번호</a>
-				<form:input type="text" class="insertZipcode" name="mem_zipcode" path="mem_zipcode"/>
+				<form:input type="text" class="mem_zipcode" name="mem_zipcode" path="mem_zipcode"/>
 				<input type="button" class="findZip" value="우편번호찾기">
 			</li>
 			<li>
 				<a>주소</a>
-				<form:input type="text" class="insertAddr1" name="mem_addr1" path="mem_addr1"/>
+				<form:input type="text" class="mem_addr1" name="mem_addr1" path="mem_addr1"/>
 			</li>
 			<li>
 				<a>상세주소</a>
-				<form:input type="text" class="insertAddr2" name="mem_addr2" path="mem_addr2"/>
+				<form:input type="text" class="mem_addr2" name="mem_addr2" path="mem_addr2"/>
 			</li>
 			<li>
 				<a>자기소개</a>
-				<form:input type="text" class="insertIntro" name="mem_intro" path="mem_intro"/>
+				<form:input type="text" class="mem_intro" name="mem_intro" path="mem_intro"/>
 			</li>
 		</ul>
 		<input type="submit" value="회원가입" class="signUpBtn">

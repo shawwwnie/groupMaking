@@ -8,16 +8,16 @@ import javax.validation.constraints.NotEmpty;
 
 public class MemberVO {
 	//회원번호
-	private int mem_num;
+	private String mem_num;
 	//회원 등급
-	private int mem_auth;
+	private String mem_auth;
 	//아이디
 	@Pattern(regexp="^[A-Za-z0-9+]{4,10}$")
 	@NotEmpty
 	private String mem_id;
 	//성별
 	@NotEmpty
-	private int mem_gender;
+	private String mem_gender;
 	//이름
 	@NotEmpty
 	private String mem_name;
@@ -26,7 +26,7 @@ public class MemberVO {
 	private String mem_pw;
 	//전화번호
 	@NotEmpty
-	private int mem_phone;
+	private String mem_phone;
 	//이메일
 	@NotEmpty
 	private String mem_email;
@@ -41,19 +41,19 @@ public class MemberVO {
 	//가입일
 	private Date mem_date;
 	//신고당한 횟수
-	private int mem_black;
+	private String mem_black;
 	
 	/*@@@@@@@@@@ Getter&Setter @@@@@@@@@@@@*/
-	public int getMem_num() {
+	public String getMem_num() {
 		return mem_num;
 	}
-	public void setMem_num(int mem_num) {
+	public void setMem_num(String mem_num) {
 		this.mem_num = mem_num;
 	}
-	public int getMem_auth() {
+	public String getMem_auth() {
 		return mem_auth;
 	}
-	public void setMem_auth(int mem_auth) {
+	public void setMem_auth(String mem_auth) {
 		this.mem_auth = mem_auth;
 	}
 	public String getMem_id() {
@@ -62,10 +62,10 @@ public class MemberVO {
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
 	}
-	public int getMem_gender() {
+	public String getMem_gender() {
 		return mem_gender;
 	}
-	public void setMem_gender(int mem_gender) {
+	public void setMem_gender(String mem_gender) {
 		this.mem_gender = mem_gender;
 	}
 	public String getMem_name() {
@@ -80,10 +80,10 @@ public class MemberVO {
 	public void setMem_pw(String mem_pw) {
 		this.mem_pw = mem_pw;
 	}
-	public int getMem_phone() {
+	public String getMem_phone() {
 		return mem_phone;
 	}
-	public void setMem_phone(int mem_phone) {
+	public void setMem_phone(String mem_phone) {
 		this.mem_phone = mem_phone;
 	}
 	public String getMem_email() {
@@ -122,10 +122,10 @@ public class MemberVO {
 	public void setMem_date(Date mem_date) {
 		this.mem_date = mem_date;
 	}
-	public int getMem_black() {
+	public String getMem_black() {
 		return mem_black;
 	}
-	public void setMem_black(int mem_black) {
+	public void setMem_black(String mem_black) {
 		this.mem_black = mem_black;
 	}
 	

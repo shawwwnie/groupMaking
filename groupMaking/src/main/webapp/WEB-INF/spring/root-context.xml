@@ -12,7 +12,7 @@
 	
 	<!-- 빈 자동 스캔 - servlet-context.xml에 Controller를 자동 스캔
 	         설정해서 아래 설정에서는 Controller 자동 스캔 제외-->
-	<context:component-scan base-package="kr.spring">
+	<context:component-scan base-package="com.groupMaking">
 		<!-- Controller를 스캔 대상에서 제외시킴 -->
 		<context:exclude-filter type="annotation" 
 		       expression="org.springframework.stereotype.Controller"/>
@@ -66,7 +66,7 @@
 		<property name="typeAliasesPackage" value="com.groupMaking.member.vo"/>	
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.groupMaking.member
+		<property name="basePackage" value="com.groupMaking.member.dao
 											"/>
 	</bean> 
 	
