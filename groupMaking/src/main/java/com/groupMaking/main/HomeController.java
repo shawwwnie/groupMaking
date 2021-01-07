@@ -25,8 +25,14 @@ public class HomeController {
 		return new MemberVO();
 	}
 	
+	@RequestMapping(value = "/main/main.do", method = RequestMethod.GET)
+	public String main() {
+		//회원가입 페이지 호출
+		return "main/main";
+	}
+	
 	@RequestMapping(value = "/member/signUp.do", method = RequestMethod.GET)
-	public String home() {
+	public String signUp() {
 		//회원가입 페이지 호출
 		return "member/signUp";
 	}
