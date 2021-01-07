@@ -27,4 +27,9 @@ public class MemberServiceImpl implements MemberService{
 		System.out.println("insertMember_detail() 메서드 실행 성공");
 	}
 
+	@Override
+	public MemberVO login(String mem_id) {
+		return memberMapper.login(mem_id);
+	}
+
 }

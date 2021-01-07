@@ -23,6 +23,8 @@ public interface MemberMapper {
 	/*********** 회원정보찾기 ************/
 	//아이디 중복체크,로그인 사용 가능
 	//매개변수를 아이디만 주기
+	@Select("SELECT * FROM member_detail WHERE mem_id=#{mem_id}")
+	public MemberVO login(String mem_id);
 	
 	//회원 전체정보 불러오기
 	//매개변수를 mem_num으로 받기
@@ -33,7 +35,6 @@ public interface MemberMapper {
 	//비밀번호 찾기
 	//매개변수를 아이디랑 @@@로 받기
 	
-	
-	
 	/*********** 회원정보찾기 ************/
+	
 }
