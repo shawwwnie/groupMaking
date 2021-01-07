@@ -1,14 +1,19 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+<meta charset="UTF-8">
+<title>MainPage</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+	<div class="login">
+		<p>아이디</p>
+		<input type="text" id="id" value="">
+		<p>비밀번호</p>
+		<input type="text" id="pw" value="">
+		<input type="submit" value="로그인">
+		<input type="button" value="회원가입" onClick="location.href='${pageContext.request.contextPath}/member/signUp.do'">
+	</div>
 </body>
-</html>
+</html> 
