@@ -26,7 +26,7 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.insertMember_detail(membervo);
 		System.out.println("insertMember_detail() 메서드 실행 성공");
 	}
-
+	//로그인처리 및 아이디 중복확인 시 사용할 메서드
 	@Override
 	public MemberVO login(String mem_id) {
 		return memberMapper.login(mem_id);
