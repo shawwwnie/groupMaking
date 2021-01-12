@@ -9,7 +9,8 @@
 </head>
 <body>
 	<h2>회원가입</h2>
-	<form:form class="signUpForm" action="/main/member/signUp.do" commandName="memberVO">
+	<!-- 나중에 method="GET" 빼주기 -->
+	<form:form class="signUpForm" action="/main/member/signUp1.do" commandName="memberVO" method="GET">
 		<ul> 
 			<li>
 				<a>아이디</a>
