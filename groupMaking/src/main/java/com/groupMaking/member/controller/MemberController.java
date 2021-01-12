@@ -52,7 +52,7 @@ public class MemberController {
 	  }
 	 
 
-	@RequestMapping(value = "/member/signUp1.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/signUpAndroid.do", method = RequestMethod.POST)
 	public void submitSignUpAndroid(@Valid MemberVO memberVO, BindingResult result, Model model,
 			HttpServletRequest request) {
 
