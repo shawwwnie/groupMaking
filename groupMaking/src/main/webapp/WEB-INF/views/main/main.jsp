@@ -16,6 +16,7 @@
 		<form:input type="password" id="mem_pw"  path="mem_pw" />
 		<input type="submit" value="로그인">
 		<input type="button" value="회원가입" onClick="location.href='${pageContext.request.contextPath}/member/signUp.do'">
+		<input type="button" value="게시판" onClick="location.href='${pageContext.request.contextPath}/group/groupList.do'">
 	</form:form>
 </body>
 </html> 

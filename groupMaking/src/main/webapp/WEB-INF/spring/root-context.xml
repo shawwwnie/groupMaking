@@ -66,8 +66,7 @@
 		<property name="typeAliasesPackage" value="com.groupMaking.member.vo"/>	
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.groupMaking.member.dao
-											"/>
+		<property name="basePackage" value="com.groupMaking.member.dao"/>
 	</bean> 
 	
 </beans>

@@ -36,20 +36,20 @@ public class MemberController {
 	// 회원가입 / SPRING용 / 나중에 이거 주석 풀어서 사용할것
 
 	
-	  @RequestMapping(value="/member/signUp.do", method=RequestMethod.POST) public
-	  String submitSignUp(@Valid MemberVO memberVO, BindingResult result, Model
-	  model, HttpServletRequest request) {
-	  
-	  //System.out.println("memberController 진입");
-	  //System.out.println("memberVO : " + memberVO); //유효성 체크 결과 오류가 있으면 폼 호출
-	  
-	  //if(result.hasErrors()) { return homeController.home(); }
-	  
-	  
-	  //유효성 체크 결과 오류가 없으면 쿼리작업 memberService.insertMember_detail(memberVO);
-	  System.out.println("memberVO : " + memberVO); //회원가입 후 메인페이지 진입 
-	  return "main/main"; 
-	  }
+	@RequestMapping(value="/member/signUp.do", method=RequestMethod.POST) public
+	String submitSignUp(@Valid MemberVO memberVO, BindingResult result, Model
+	model, HttpServletRequest request) {
+		  
+		//System.out.println("memberController 진입");
+		//System.out.println("memberVO : " + memberVO); //유효성 체크 결과 오류가 있으면 폼 호출
+		  
+		//if(result.hasErrors()) { return homeController.home(); }
+		  
+		
+		//유효성 체크 결과 오류가 없으면 쿼리작업 memberService.insertMember_detail(memberVO);
+		System.out.println("memberVO : " + memberVO); //회원가입 후 메인페이지 진입 
+		return "main/main"; 
+	}
 	 
 
 	@RequestMapping(value = "/member/signUpAndroid.do", method = RequestMethod.POST)
@@ -67,7 +67,6 @@ public class MemberController {
 		memberService.insertMember_detail(memberVO);
 		System.out.println("memberVO : " + memberVO);
 		// 회원가입 후 메인페이지 진입
-		
 	}
 
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
