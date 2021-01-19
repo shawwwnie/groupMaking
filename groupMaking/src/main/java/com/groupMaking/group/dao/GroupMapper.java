@@ -16,7 +16,7 @@ public interface GroupMapper {
 	@Insert("INSERT INTO group_sum (group_num, group_admin, group_name) VALUES (#{group_num}, #{mem_num}, #{group_name})")
 	public void insertGroup_sum(GroupVO groupvo);
 	//2. group_detail 테이블 입력
-	//시작은 시작전으로 고정
+	//시작여부는 시작전으로 고정
 	@Insert("INSERT INTO group_detail (group_num, group_name, group_intro, group_location, group_required, group_time, group_start) VALUES (#{group_num}, #{group_name}, #{group_intro}, #{group_location}, #{group_required}, #{group_time}, 1")
 	public void insertGroup_detail(GroupVO groupvo);
 	
