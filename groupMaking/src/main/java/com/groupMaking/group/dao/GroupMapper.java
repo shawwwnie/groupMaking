@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import com.groupMaking.group.vo.GroupVO;
+import com.groupMaking.member.vo.MemberVO;
 
 public interface GroupMapper {
 	/************ 그룹 만들기 **************/
@@ -27,6 +28,14 @@ public interface GroupMapper {
 	//여기는 검색조건 추가해야해서 xml에 sql문 넣음
 	public List<GroupVO> allGroupList(Map<String,Object> map);
 	public int selectCount(Map<String,Object> map);
+	
+	/********** 그룹 가입여부 확인하기 ***************/
+	@Select("SELECT * FROM member_group where mem_num=#{mem_num} AND mem_group=#{mem_group}")
+	public MemberVO selectMember_group(MemberVO memberVO);
+	
+	/********** 그룹 디테일 불러오기 ***************/
+	@Select("SELECT * FROM group_detail d JOIN group_sum s ON d.group_num = s.group_num WHERE d.group_num = #{group_num}")
+	public GroupVO selectGroup_detail(String group_num);
 	
 	
 }

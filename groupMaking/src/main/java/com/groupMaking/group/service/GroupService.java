@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.groupMaking.group.vo.GroupVO;
+import com.groupMaking.member.vo.MemberVO;
 
 public interface GroupService {
 	/*
@@ -18,5 +19,9 @@ public interface GroupService {
 	public List<GroupVO> allGroupList(Map<String,Object> map);
 	//게시판 글 갯수 카운팅
 	public int selectCount(Map<String,Object> map);
+	//그룹 디테일 불러오기
+	public GroupVO selectGroup_detail(String group_num);
+	//그룹 가입여부 확인하기
+	public MemberVO selectMember_group(MemberVO memberVO);
 	
 }

@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javaScript"
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+<script type="text/javaScript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 <script>
 $(document).ready(function(){
 		
@@ -47,7 +45,8 @@ $(document).ready(function(){
 										output += '<h1 calss="logo">' + item.group_name + '</h1>';
 									output += '</div>';
 									output += '<div class="back side">';
-										output += '<h3 class="name">' + item.group_name + '</h3>';
+										output += '<h2 class="name">' + item.group_name + '</h2>';
+										output += '<a class="property" href="/main/group/groupDetail.do?group_num=' + item.group_num + '">그룹 입장하기</br></a>';
 										output += '<div> 그룹소개 </br>' + item.group_intro + '</div>';
 										output += '<div class="info">';
 											output += '<p><span class="property"> 그룹지역 : </span>' + item.group_location + '</p>';

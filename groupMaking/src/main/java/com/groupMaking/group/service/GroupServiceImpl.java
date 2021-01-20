@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.groupMaking.group.dao.GroupMapper;
 import com.groupMaking.group.vo.GroupVO;
+import com.groupMaking.member.vo.MemberVO;
 
 
 @Service("groupService")
@@ -45,5 +46,20 @@ public class GroupServiceImpl implements GroupService{
 		System.out.println("그룹 갯수 카운팅 메서드 진입");
 		return groupMapper.selectCount(map);
 	}
+
+	@Override
+	public GroupVO selectGroup_detail(String group_num) {
+		System.out.println("그룹디테일 불러오는 메서드 진입");
+		return groupMapper.selectGroup_detail(group_num);
+	}
+
+	@Override
+	public MemberVO selectMember_group(MemberVO memberVO) {
+		System.out.println("그룹 가입여부 확인 메서드 진입");
+		return groupMapper.selectMember_group(memberVO);
+	}
+	
+	
+	
 
 }

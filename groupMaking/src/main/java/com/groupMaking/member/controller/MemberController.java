@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.groupMaking.group.service.GroupService;
+import com.groupMaking.group.vo.GroupVO;
 import com.groupMaking.main.HomeController;
 import com.groupMaking.member.service.MemberService;
 import com.groupMaking.member.vo.MemberVO;
@@ -30,8 +33,13 @@ public class MemberController {
     
 	@Resource
 	private MemberService memberService;
+	
+	@Resource
+	private GroupService groupService;
 
 	private HomeController homeController;
+	
+	private GroupVO groupVO;
 
 	// 자바빈(VO) 초기화
 	// 서버 유효성 체크시 필수로 필요
@@ -141,7 +149,8 @@ public class MemberController {
 	
 	//그룹 가입 메서드
 	@RequestMapping(value = "/member/registerGroup.do", method = RequestMethod.GET)
-	public String registerGroup(@RequestParam String group_num,  HttpSession session, Model model) {
+	public ModelAndView registerGroup(@RequestParam String group_num, HttpServletRequest request, HttpSession session, Model model) {
+		System.out.println("------그룹가입 메서드 진입------");
 		System.out.println("해당 그룹의 그룹번호 : " + group_num);
 		
 		//세션에 있는 정보를 memberVO에 담기
@@ -153,6 +162,15 @@ public class MemberController {
 		//memberVO에 있는 정보로 member_group 테이블에 가입내용 작성
 		memberService.registerGroup(member);
 		//일단 list로 리턴 / 나중에 가입한 그룹 디테일로 넣기
-		return "group/groupList";
+		System.out.println(group_num + "번 그룹 가입완료");
+		
+		//가입한 그룹 디테일 얻기
+		GroupVO groupVO = groupService.selectGroup_detail(group_num);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("group/groupDetail");
+		mav.addObject("group", groupVO);
+		
+		return mav;
 	}
 }

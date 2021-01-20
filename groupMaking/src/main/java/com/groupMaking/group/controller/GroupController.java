@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.groupMaking.group.service.GroupService;
 import com.groupMaking.group.vo.GroupVO;
@@ -105,6 +106,32 @@ public class GroupController {
 		System.out.println("그룹만들기 성공");
 		//일단은 그룹리스트로 넣음, 나중에 만든 그룹으로 이동하기
 		return "group/groupList";
+	}
+	//그룹 디테일 페이지 호출
+	@RequestMapping(value="/group/groupDetail.do", method=RequestMethod.GET)
+	public ModelAndView groupDetail(@RequestParam String group_num, HttpServletRequest request, HttpSession session, Model model) {
+		System.out.println("그룹 입장하기 메서드 진입");
+		//로그인한 회원 정보를 user에 넣기
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		//member에 현재 그룹의 그룹번호 넣기
+		member.setMem_group(group_num);
+		//그룹 가입여부 확인하는 메서드 실행후 member2에 정보 담기
+		MemberVO member2 = groupService.selectMember_group(member);
+		//ModelAndView 객체 생성
+		ModelAndView mav = new ModelAndView();
+		if(member2 == null) {
+			System.out.println(group_num + "번 그룹은 가입하지 않은 그룹");
+			mav.setViewName("group/groupList");
+			return mav;
+		}else {
+			System.out.println(group_num + "번 그룹은 가입한 그룹");
+			//가입한 그룹 디테일 얻기
+			GroupVO groupVO = groupService.selectGroup_detail(group_num);
+			mav.setViewName("group/groupDetail");
+			mav.addObject("group", groupVO);
+			mav.addObject("user", member);
+			return mav;
+		}
 	}
 	
 	
