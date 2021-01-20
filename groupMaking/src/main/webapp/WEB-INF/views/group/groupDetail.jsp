@@ -48,7 +48,7 @@
     <div class="slide__content">
       <h1>그룹 일정</h1>
       <p>여기에 달력 api 이용해서 일정 넣기</p>
-    </div>   
+    </div>
   </div>
 
   <!-- Slide 5 -->
