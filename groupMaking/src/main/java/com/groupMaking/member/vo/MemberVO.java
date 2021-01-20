@@ -43,6 +43,17 @@ public class MemberVO {
 	//신고당한 횟수
 	private String mem_black;
 	
+	/*************** 그룹 관리 테이블 *****************/
+	//관심사
+	private String mem_like;
+	//가입한 그룹
+	private String mem_group;
+	//즐겨찾는 그룹
+	private String mem_likeGroup;
+	//관심있는 그룹
+	private String mem_wantGroup;
+	
+	
 	/*@@@@@@@@@@ Getter&Setter @@@@@@@@@@@@*/
 	public String getMem_num() {
 		return mem_num;
@@ -129,6 +140,32 @@ public class MemberVO {
 		this.mem_black = mem_black;
 	}
 	
+	public String getMem_like() {
+		return mem_like;
+	}
+	public void setMem_like(String mem_like) {
+		this.mem_like = mem_like;
+	}
+	public String getMem_group() {
+		return mem_group;
+	}
+	public void setMem_group(String mem_group) {
+		this.mem_group = mem_group;
+	}
+	public String getMem_likeGroup() {
+		return mem_likeGroup;
+	}
+	public void setMem_likeGroup(String mem_likeGroup) {
+		this.mem_likeGroup = mem_likeGroup;
+	}
+	public String getMem_wantGroup() {
+		return mem_wantGroup;
+	}
+	public void setMem_wantGroup(String mem_wantGroup) {
+		this.mem_wantGroup = mem_wantGroup;
+	}
+	
+	
 	/*@@@@@@@@@@ toString @@@@@@@@@@@@*/
 	@Override
 	public String toString() {
@@ -136,7 +173,8 @@ public class MemberVO {
 				+ mem_gender + ", mem_name=" + mem_name + ", mem_pw=" + mem_pw + ", mem_phone=" + mem_phone
 				+ ", mem_email=" + mem_email + ", mem_zipcode=" + mem_zipcode + ", mem_addr1=" + mem_addr1
 				+ ", mem_addr2=" + mem_addr2 + ", mem_intro=" + mem_intro + ", mem_date=" + mem_date + ", mem_black="
-				+ mem_black + "]";
+				+ mem_black + ", mem_like=" + mem_like + ", mem_group=" + mem_group + ", mem_likeGroup=" + mem_likeGroup
+				+ ", mem_wantGroup=" + mem_wantGroup + "]";
 	}
 	
 	

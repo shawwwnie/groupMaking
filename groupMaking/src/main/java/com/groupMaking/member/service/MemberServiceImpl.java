@@ -1,6 +1,9 @@
 package com.groupMaking.member.service;
 
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import com.groupMaking.member.dao.MemberMapper;
@@ -30,6 +33,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberVO login(String mem_id) {
 		return memberMapper.login(mem_id);
+	}
+	//그룹 가입하는 메서드
+	@Override
+	public void registerGroup(MemberVO membervo) {
+		memberMapper.registerGroup(membervo);
+	}
+	//그룹 가입여부 확인 메서드
+	@Override
+	public MemberVO checkRegister(Map<String, Object> map) {
+		return memberMapper.checkRegister(map);
 	}
 
 }

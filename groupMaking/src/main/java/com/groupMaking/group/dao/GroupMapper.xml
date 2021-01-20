@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.groupMaking.group.dao.GroupMapper">  
+	<select id="allGroupList" parameterType="map" resultType="groupVO">
+		SELECT
+		*
+		FROM(SELECT
+		a.*,
+		rownum rnum
+		FROM (SELECT
+		*
+		FROM group_detail d JOIN group_sum s ON d.group_num=s.group_num 
+			<if test="keyword != '' and keyfield == 'group_name'">
+				 AND (d.group_name LIKE '%' || #{keyword} || '%')
+			</if>
+			<if test="keyword != '' and keyfield == 'group_admin'">
+				AND (s.group_admin LIKE '%' || #{keyword} || '%')
+			</if>
+			<if test="keyword != '' and keyfield == 'all'">
+				AND ((d.group_name LIKE '%' || #{keyword} || '%')  or
+				(s.group_admin LIKE '%' || #{keyword} || '%'))
+			</if>
+		ORDER BY d.group_num DESC)a)
+ 				<![CDATA[
+ 					WHERE rnum >= #{start} AND rnum <= #{end}
+ 				]]>
+	</select>
+	<select id="selectCount" parameterType="map"
+		resultType="integer">
+		SELECT
+		COUNT(*)
+		FROM group_detail d JOIN group_sum s ON d.group_num = s.group_num
+		<where>
+			<if test="keyword != '' and keyfield == 'group_name'">
+				d.group_name LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyword != '' and keyfield == 'group_admin'">
+				s.group_admin LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyword != '' and keyfield == 'all'">
+				d.group_name LIKE '%' || #{keyword} || '%' or
+				s.group_admin LIKE '%' || #{keyword} || '%'
+			</if>
+		</where>
+	</select>
+</mapper>

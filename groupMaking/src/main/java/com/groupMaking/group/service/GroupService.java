@@ -1,5 +1,8 @@
 package com.groupMaking.group.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.groupMaking.group.vo.GroupVO;
 
 public interface GroupService {
@@ -10,4 +13,10 @@ public interface GroupService {
 	 * public void insertGroup_detail(GroupVO groupvo); -> 그룹 상세정보 넣기
 	 */
 	public void insertGroup_detail(GroupVO groupvo);
+	
+	//게시판 리스트 호출
+	public List<GroupVO> allGroupList(Map<String,Object> map);
+	//게시판 글 갯수 카운팅
+	public int selectCount(Map<String,Object> map);
+	
 }

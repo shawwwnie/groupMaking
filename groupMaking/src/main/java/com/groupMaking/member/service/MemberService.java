@@ -1,5 +1,7 @@
 package com.groupMaking.member.service;
 
+import java.util.Map;
+
 import com.groupMaking.member.vo.MemberVO;
 
 public interface MemberService {
@@ -13,5 +15,11 @@ public interface MemberService {
 	
 	//로그인, 아이디 중복체크 시 사용하는 메서드
 	public MemberVO login(String mem_id);
+	
+	//그룹 가입하는 메서드
+	public void registerGroup(MemberVO membervo);
+	
+	//그룹 가입여부 확인 메서드
+	public MemberVO checkRegister(Map<String,Object> map);
 	
 }

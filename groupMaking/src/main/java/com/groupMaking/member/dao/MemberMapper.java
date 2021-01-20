@@ -1,5 +1,7 @@
 package com.groupMaking.member.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -36,5 +38,13 @@ public interface MemberMapper {
 	//매개변수를 아이디랑 @@@로 받기
 	
 	/*********** 회원정보찾기 ************/
+	
+	/*********** 그룹 가입여부 확인 메서드 ************/
+	@Select("SELECT * FROM member_group WHERE mem_num=#{mem_num} AND mem_group=#{mem_group}")
+	public MemberVO checkRegister(Map<String,Object> map);
+	/*********** 그룹 가입하는 메서드 ************/
+	@Insert("INSERT INTO member_group(mem_num,mem_group) VALUES(#{mem_num},#{mem_group})")
+	public void registerGroup(MemberVO membervo);
+	
 	
 }

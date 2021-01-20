@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.groupMaking.main.HomeController;
 import com.groupMaking.member.service.MemberService;
@@ -40,8 +41,6 @@ public class MemberController {
 	}
 
 	// 회원가입 
-
-	
 	@RequestMapping(value="/member/signUp.do", method=RequestMethod.POST) public
 	String submitSignUp(@Valid MemberVO memberVO, BindingResult result, Model
 	model, HttpServletRequest request) {
@@ -52,7 +51,8 @@ public class MemberController {
 		//if(result.hasErrors()) { return homeController.home(); }
 		  
 		
-		//유효성 체크 결과 오류가 없으면 쿼리작업 memberService.insertMember_detail(memberVO);
+		//유효성 체크 결과 오류가 없으면 쿼리작업 
+		memberService.insertMember_detail(memberVO);
 		System.out.println("memberVO : " + memberVO); //회원가입 후 메인페이지 진입 
 		return "main/main"; 
 	}
@@ -75,7 +75,7 @@ public class MemberController {
 		System.out.println("memberVO : " + memberVO);
 		// 회원가입 후 메인페이지 진입
 	}
-
+	//로그인 메서드
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
 	public String submitLogin(@Valid MemberVO memberVO, BindingResult result, HttpSession session,
 			HttpServletResponse response, Model model) {
@@ -102,7 +102,7 @@ public class MemberController {
 
 	}
 	
-	//안드로이드용
+	//안드로이드용 로그인
 	@RequestMapping(value = "/member/loginAndroid.do", method = RequestMethod.POST)
 	public void submitLoginAndroid(@Valid MemberVO memberVO, BindingResult result, HttpSession session,
 			HttpServletResponse response, Model model) {
@@ -136,5 +136,23 @@ public class MemberController {
 		
 
 		
+	}
+	
+	
+	//그룹 가입 메서드
+	@RequestMapping(value = "/member/registerGroup.do", method = RequestMethod.GET)
+	public String registerGroup(@RequestParam String group_num,  HttpSession session, Model model) {
+		System.out.println("해당 그룹의 그룹번호 : " + group_num);
+		
+		//세션에 있는 정보를 memberVO에 담기
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		//클릭한 그룹의 그룹번호를 memberVO의 mem_group으로 세팅
+		member.setMem_group(group_num);
+		System.out.println("쿼리문 실행 전 member에 담긴 값 : " + member);
+		
+		//memberVO에 있는 정보로 member_group 테이블에 가입내용 작성
+		memberService.registerGroup(member);
+		//일단 list로 리턴 / 나중에 가입한 그룹 디테일로 넣기
+		return "group/groupList";
 	}
 }

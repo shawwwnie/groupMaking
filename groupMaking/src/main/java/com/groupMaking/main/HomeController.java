@@ -27,7 +27,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/main/main.do", method = RequestMethod.GET)
 	public String main() {
-		//회원가입 페이지 호출
+		//메인 페이지 호출
 		return "main/main";
 	}
 	

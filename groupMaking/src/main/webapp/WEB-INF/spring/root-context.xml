@@ -63,10 +63,12 @@
 	<bean id="sqlSessionFactory"
 	      class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-		<property name="typeAliasesPackage" value="com.groupMaking.member.vo"/>	
+		<property name="typeAliasesPackage" value="com.groupMaking.member.vo,
+													com.groupMaking.group.vo"/>	
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.groupMaking.member.dao"/>
+		<property name="basePackage" value="com.groupMaking.member.dao,
+											com.groupMaking.group.dao"/>
 	</bean> 
 	
 </beans>

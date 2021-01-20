@@ -24,3 +24,15 @@ create table member_detail(
 );
 
 create sequence member_seq;
+
+create table member_group(
+	mem_num number not null,
+	mem_like number ,
+	mem_group number ,
+	mem_likeGroup number ,
+	mem_wantGroup number ,
+	constraint mem_group_numfk foreign key (mem_num) references member (mem_num),
+	constraint mem_group_groupfk foreign key (mem_group) references group_sum (group_num),
+	constraint mem_group_likefk foreign key (mem_likeGroup) references group_sum (group_num),
+	constraint mem_group_wantfk foreign key (mem_wantGroup) references group_sum (group_num)
+);
