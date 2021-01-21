@@ -23,5 +23,14 @@ public interface GroupService {
 	public GroupVO selectGroup_detail(String group_num);
 	//그룹 가입여부 확인하기
 	public MemberVO selectMember_group(MemberVO memberVO);
+	//그룹 가입한 회원 불러오기
+	public List<GroupVO> selectGroup_member(String group_num);
+	/*게시판 입력관련 사이클 묶기(보드 번호 받기 + 보드 내용 작성)*/
+	public void insertGroup_board(GroupVO groupVO);
 	
+	//게시판 내용 불러오기
+	public List<GroupVO> selectGroup_board(String group_num);
+	
+	//게시판 디테일 불러오기
+	public GroupVO selectBoard_detail(String board_num);
 }

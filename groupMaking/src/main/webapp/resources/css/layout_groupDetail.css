@@ -1,4 +1,4 @@
-/****************************************/
+/****************** 배경 CSS **********************/
 html, body {
   margin: 0;
   font-family: sans-serif;
@@ -16,6 +16,10 @@ html, body {
 input {
   display: none;
 }
+#board_list{
+	width: 80%;
+	margin-left: 10%;
+}
 input:checked + .slide {
   transform: translateX(0px);
   transition: transform 0.5s ease-in-out;
@@ -24,7 +28,11 @@ input:checked + .slide .slide__content {
   width: 100%;
   display: block;
 }
-
+.boardSubmit{
+	width: 100%;
+	height: 15px;
+	
+}
 .slide {
   transform: translateX(-100%);
   position: absolute;
@@ -205,3 +213,4 @@ label:nth-child(13) {
 .psst a {
   color: #0096ff;
 }
+/******************* 토글메뉴 CSS **********************/

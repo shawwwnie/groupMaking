@@ -42,6 +42,7 @@ public class GroupController {
 	@RequestMapping(value = "/group/groupList.do", method = RequestMethod.GET)
 	public String groupList() {
 		//그룹리스트 페이지 호출
+		System.out.println("그룹 리스트 페이지 호출 메서드 진입");
 		return "group/groupList";
 	}
 	//그룹 목록 불러오기
@@ -79,6 +80,7 @@ public class GroupController {
 		return hashMap;
 		
 	}
+	
 	
 	//그룹 만들기 페이지 호출
 	@RequestMapping(value = "/group/groupMake.do", method = RequestMethod.GET)
@@ -127,13 +129,70 @@ public class GroupController {
 			System.out.println(group_num + "번 그룹은 가입한 그룹");
 			//가입한 그룹 디테일 얻기
 			GroupVO groupVO = groupService.selectGroup_detail(group_num);
+			//가입한 그룹 멤버를 list 형식으로 members에 넣기
+			List<GroupVO> members = null;
+			members = groupService.selectGroup_member(group_num);
+			//그룹 리스트를 list 형식으로 board에 넣기
+			List<GroupVO> board = null;
+			board = groupService.selectGroup_board(group_num);
+			//mav에 각 ("jsp로 보낼 이름", 여기에 받아온 이름) 형식으로 넣기
 			mav.setViewName("group/groupDetail");
 			mav.addObject("group", groupVO);
+			mav.addObject("board",board);
+			mav.addObject("members", members);
 			mav.addObject("user", member);
 			return mav;
 		}
 	}
 	
+	//그룹 디테일 호출 메서드
+	@RequestMapping(value="/group/groupBoardDetail.do", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView boardDetail(@RequestParam String board_num, HttpSession session) {
+		System.out.println("디테일 호출 메서드 진입");
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		System.out.println("전달받은 board_num : " + board_num);
+		
+		GroupVO detail = groupService.selectBoard_detail(board_num);
+		System.out.println("쿼리문 결과 : " + detail);
+		//ModelAndView 객체 생성
+		ModelAndView mav = new ModelAndView();
+		//mav에 쿼리문 결과값 받아오기
+		mav.setViewName("group/groupBoard_detail");
+		mav.addObject("detail", detail);
+		return mav;
+	}
 	
+	//채팅 입력 메서드
+	@RequestMapping(value="/group/boardSubmit.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String boardSubmit(@RequestParam String group_num, @RequestParam String board_content, HttpSession session) {
+		System.out.println("채팅 입력 메서드 진입");
+		//로그인한 회원 정보를 user에 넣기
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		GroupVO group = new GroupVO();
+		group.setMem_num(member.getMem_num());
+		group.setGroup_num(group_num);
+		group.setBoard_content(board_content);
+		groupService.insertGroup_board(group);
+		
+		return "group/groupDetail";
+	}
+	
+	//이미지 출력을 위한 메서드
+	@RequestMapping("/group/imageView.do")
+	public ModelAndView viewImage(@RequestParam String board_num) {
+		System.out.println("이미지 출력 메서드 진입");
+		System.out.println("전달받은 board_num : " + board_num);
+		GroupVO detail = groupService.selectBoard_detail(board_num);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		mav.addObject("imageFile", detail.getBoard_file());
+		mav.addObject("filename", detail.getBoard_filename());
+		System.out.println("board_file : " + detail.getBoard_file());
+		System.out.println("board_filename : " + detail.getBoard_filename());
+		System.out.println("mav에 담긴 내용 : " + mav);
+		return mav;
+	}
 	
 }

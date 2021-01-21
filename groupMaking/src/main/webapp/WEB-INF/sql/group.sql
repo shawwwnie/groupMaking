@@ -36,10 +36,15 @@ create table group_board(
 	board_num number not null,
 	group_num number not null,
 	mem_num number not null,
+    board_title varchar2(100),
 	board_content varchar2(300),
 	board_file blob,
+	board_filename varchar2(300),
+	board_location varchar2(300),
+	board_limit date,
 	board_date date not null,
 	constraint group_board_pk primary key(board_num),
 	constraint group_board_groupfk foreign key (group_num) references group_sum (group_num),
 	constraint group_board_memfk foreign key (mem_num) references member (mem_num)	
 );
+create sequence board_seq;

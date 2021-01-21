@@ -58,6 +58,34 @@ public class GroupServiceImpl implements GroupService{
 		System.out.println("그룹 가입여부 확인 메서드 진입");
 		return groupMapper.selectMember_group(memberVO);
 	}
+
+	@Override
+	public List<GroupVO> selectGroup_member(String group_num) {
+		return groupMapper.selectGroup_member(group_num);
+	}
+
+	@Override
+	public void insertGroup_board(GroupVO groupVO) {
+		//board_num을 시퀀스에서 받아와서 groupVO에 넣기
+		groupVO.setBoard_num(groupMapper.selectBoard_num());
+		System.out.println("board_num : " + groupVO.getBoard_num());
+		
+		groupMapper.insertGroup_board(groupVO);
+		System.out.println("insertGroup_board 메서드 실행 성공");
+		
+	}
+
+	@Override
+	public List<GroupVO> selectGroup_board(String group_num) {
+		System.out.println("채팅내용 불러오는 메서드 진입");
+		return groupMapper.selectGroup_board(group_num);
+	}
+
+	@Override
+	public GroupVO selectBoard_detail(String board_num) {
+		System.out.println("그룹 디테일 불러오는 메서드 진입");
+		return groupMapper.selectBoard_detail(board_num);
+	}
 	
 	
 	

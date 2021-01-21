@@ -1,7 +1,10 @@
 package com.groupMaking.group.vo;
 
+import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class GroupVO {
 	//그룹번호
@@ -12,6 +15,8 @@ public class GroupVO {
 	private String group_name;
 	//회원번호
 	private String mem_num;
+	//회원 아이디
+	private String mem_id;
 	//회원관심사
 	private String mem_like;
 	//회원이 가입한 그룹
@@ -32,12 +37,14 @@ public class GroupVO {
 	private String group_start;
 	//그룹내 게시판 글번호
 	private String board_num;
-	//그룹내 게시판 글제목
+	//그룹내 게시판 제목
 	private String board_title;
 	//그룹내 게시판 작성글 내용
 	private String board_content;
 	//그룹내 게시판 업로드 파일
-	private Blob board_file;
+	private byte[] board_file;
+	//업로드한 파일 명
+	private String board_filename;
 	//그룹내 게시판 글 장소
 	private String board_location;
 	//그룹내 게시판 등롤한 날짜 기한
@@ -45,7 +52,22 @@ public class GroupVO {
 	//작성시간
 	private Date board_date;
 	
+	//파일 업로드 처리
+	public void setBoard_fileUpload(MultipartFile feedUpload)throws IOException{
+		//MultipartFile -> byte[] 반환
+		setBoard_file(feedUpload.getBytes());
+		//파일명 구하기, 나중에 필요하면 주석 풀어서 쓰기 
+		setBoard_filename(feedUpload.getOriginalFilename());
+	}
 	
+	public String getBoard_title() {
+		return board_title;
+	}
+
+	public void setBoard_title(String board_title) {
+		this.board_title = board_title;
+	}
+
 	public String getGroup_num() {
 		return group_num;
 	}
@@ -69,6 +91,12 @@ public class GroupVO {
 	}
 	public void setMem_num(String mem_num) {
 		this.mem_num = mem_num;
+	}
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
 	}
 	public String getMem_like() {
 		return mem_like;
@@ -130,24 +158,26 @@ public class GroupVO {
 	public void setBoard_num(String board_num) {
 		this.board_num = board_num;
 	}
-	public String getBoard_title() {
-		return board_title;
-	}
-	public void setBoard_title(String board_title) {
-		this.board_title = board_title;
-	}
 	public String getBoard_content() {
 		return board_content;
 	}
 	public void setBoard_content(String board_content) {
 		this.board_content = board_content;
 	}
-	public Blob getBoard_file() {
+	public byte[] getBoard_file() {
 		return board_file;
 	}
-	public void setBoard_file(Blob board_file) {
+	public void setBoard_file(byte[] board_file) {
 		this.board_file = board_file;
 	}
+	public String getBoard_filename() {
+		return board_filename;
+	}
+
+	public void setBoard_filename(String board_filename) {
+		this.board_filename = board_filename;
+	}
+
 	public String getBoard_location() {
 		return board_location;
 	}
@@ -166,21 +196,19 @@ public class GroupVO {
 	public void setBoard_date(Date board_date) {
 		this.board_date = board_date;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "GroupVO [group_num=" + group_num + ", group_admin=" + group_admin + ", group_name=" + group_name
-				+ ", mem_num=" + mem_num + ", mem_like=" + mem_like + ", mem_group=" + mem_group + ", mem_likeGroup="
-				+ mem_likeGroup + ", mem_wantGroup=" + mem_wantGroup + ", group_intro=" + group_intro
-				+ ", group_location=" + group_location + ", group_required=" + group_required + ", group_time="
-				+ group_time + ", group_start=" + group_start + ", board_num=" + board_num + ", board_title="
-				+ board_title + ", board_content=" + board_content + ", board_location=" + board_location
-				+ ", board_limit=" + board_limit + ", board_date=" + board_date + "]";
+				+ ", mem_num=" + mem_num + ", mem_id=" + mem_id + ", mem_like=" + mem_like + ", mem_group=" + mem_group
+				+ ", mem_likeGroup=" + mem_likeGroup + ", mem_wantGroup=" + mem_wantGroup + ", group_intro="
+				+ group_intro + ", group_location=" + group_location + ", group_required=" + group_required
+				+ ", group_time=" + group_time + ", group_start=" + group_start + ", board_num=" + board_num
+				+ ", board_title=" + board_title + ", board_content=" + board_content + ", board_filename="
+				+ board_filename + ", board_location=" + board_location + ", board_limit=" + board_limit
+				+ ", board_date=" + board_date + "]";
 	}
-	
-	
-	
+
 	
 	
 }

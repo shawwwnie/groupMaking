@@ -37,4 +37,7 @@
 		<beans:property name="defaultEncoding" value="UTF-8" /> 
 	</beans:bean>
 	
+	<!-- BLOB 타입 이미지 표시 -->
+	<beans:bean id="imageView" class="com.groupMaking.view.ImageView" />
+	
 </beans:beans>

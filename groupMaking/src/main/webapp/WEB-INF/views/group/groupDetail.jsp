@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_groupDetail.css">
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <input type="button" onclick="location.href='/main/main.do'" value="홈버튼">
 <fieldset class="slideshow">
 
@@ -13,6 +14,7 @@
       <p>그룹 소개</p>
       <p>${group.group_intro}</p>
       <p>그룹 정보</p>
+      <input type="hidden" id="group_num" value="${group.group_num}">
       <ul>
         <li>그룹지역 : ${group.group_location}</li>
         <li>모집기준 : ${group.group_required}</li>
@@ -22,12 +24,35 @@
   </div>
 
   <!-- Slide 2 -->
-  <label class="slide-button" for="slideCheckbox2">게시판</label>
+  <label class="slide-button" for="slideCheckbox2">그룹 게시판</label>
   <input type="radio" id="slideCheckbox2" name="slide"></input>
   <div class="slide">
     <div class="slide__content">
-      <h1>게시판</h1>
-      <p>여기에 채팅창 넣기</p>
+      <h1>그룹 게시판</h1>
+      <div id="chatting">
+      <hr size="1" width="100%">
+    	 <div class=chatList>
+    		<table border="1" id="board_list">
+    			<thead>
+    				<tr align="center" bgcolor="#e3e3e3">
+    					<th>제목</th><th>작성자</th><th>작성일</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+	     	 	<c:forEach var="board" items="${board}">
+		     	 	<tr align="center" bgcolor="#e3e3e3">
+    					<td><a href="/main/group/groupBoardDetail.do?board_num=${board.board_num}">${board.board_title}</a></td>
+    					<td>${board.mem_id}</td>
+    					<td>${board.board_date}</td>
+    				</tr>
+	     	 	</c:forEach>
+	     	 	</tbody>
+     	 	</table>
+     	 </div>
+	  <hr size="1" width="100%">
+	  
+     </div>
+	  <input type="button" onClick="location.href='/main/group/groupBoardWrite.do'" value="글쓰기" style="display: inline-block; float: right;">
     </div> 
   </div>
 
@@ -37,7 +62,9 @@
   <div class="slide">
     <div class="slide__content">
       <h1>가입 멤버</h1>
-      <p>여기에 가입멤버 리스트 넣기</p>
+      <c:forEach var="members" items="${members}">
+      	<a href="#menu" id="toggle">${members.mem_id}</a>
+      </c:forEach>
     </div>  
   </div>
 
@@ -58,6 +85,7 @@
     <div class="slide__content">
       <h1>그룹관리</h1>
       <p>그룹 관리 넣기</p>
+      
     </div>  
   </div>
 
