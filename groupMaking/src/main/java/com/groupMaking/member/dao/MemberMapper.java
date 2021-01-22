@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.groupMaking.member.vo.MemberVO;
 
@@ -37,6 +38,10 @@ public interface MemberMapper {
 	//비밀번호 찾기
 	//매개변수를 아이디랑 @@@로 받기
 	
+	//회원의 블랙 숫자 추가하기
+	@Update("UPDATE member_detail SET mem_black=mem_black+1 WHERE mem_num=#{mem_num}")
+	public void updateBlack(String mem_num);
+	
 	/*********** 회원정보찾기 ************/
 	
 	/*********** 그룹 가입여부 확인 메서드 ************/
@@ -45,6 +50,8 @@ public interface MemberMapper {
 	/*********** 그룹 가입하는 메서드 ************/
 	@Insert("INSERT INTO member_group(mem_num,mem_group) VALUES(#{mem_num},#{mem_group})")
 	public void registerGroup(MemberVO membervo);
+	
+	
 	
 	
 }

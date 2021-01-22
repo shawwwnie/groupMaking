@@ -2,6 +2,7 @@ package com.groupMaking.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -171,6 +172,36 @@ public class MemberController {
 		mav.setViewName("group/groupDetail");
 		mav.addObject("group", groupVO);
 		
+		return mav;
+	}
+	
+	//블랙 1 올리는 메서드
+	@RequestMapping(value="/member/updateBlack.do", method=RequestMethod.GET)
+	public ModelAndView updateBlack(@RequestParam String mem_num, @RequestParam String group_num, HttpSession session) {
+		
+		System.out.println("블랙 추가하는 메서드 진입");
+		System.out.println("전달받은 mem_num : " + mem_num);
+		memberService.updateBlack(mem_num);
+		
+		//로그인한 회원 정보를 user에 넣기
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		//member에 현재 그룹의 그룹번호 넣기
+		member.setMem_group(group_num);
+		//가입한 그룹 디테일 얻기
+		GroupVO groupVO = groupService.selectGroup_detail(group_num);
+		//가입한 그룹 멤버를 list 형식으로 members에 넣기
+		List<GroupVO> members = null;
+		members = groupService.selectGroup_member(group_num);
+		//그룹 리스트를 list 형식으로 board에 넣기
+		List<GroupVO> board = null;
+		board = groupService.selectGroup_board(group_num);
+		ModelAndView mav = new ModelAndView();
+		//mav에 각 ("jsp로 보낼 이름", 여기에 받아온 이름) 형식으로 넣기
+		mav.setViewName("group/groupDetail");
+		mav.addObject("group", groupVO);
+		mav.addObject("board",board);
+		mav.addObject("members", members);
+		mav.addObject("user", member);
 		return mav;
 	}
 }

@@ -52,13 +52,10 @@ public class GroupController {
 		System.out.println("목록불러오기 ajax 진입");
 		List<GroupVO> list = null;
 		
-		MemberVO member = (MemberVO)session.getAttribute("user");
-		int sessionMem_num = Integer.parseInt(member.getMem_num());
-		
 		int count = 0;
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("mem_num", sessionMem_num);
+		
 		
 		count = groupService.selectCount(map);
 		
@@ -80,6 +77,45 @@ public class GroupController {
 		return hashMap;
 		
 	}
+	//그룹 검색목록 불러오기
+		@RequestMapping("/group/groupListSearch.do")
+		@ResponseBody
+		public ModelAndView getGroupListSearch(@RequestParam(value="pageNum",defaultValue="1") int currentPage, 
+				@RequestParam(value="keyfield",defaultValue="") String keyfield,
+				@RequestParam(value="keyword",defaultValue="") String keyword,
+				@RequestParam(value="rowCount",defaultValue="10") int rowCount,
+				HttpSession session, Model model){
+			System.out.println("검색 목록불러오기 메서드 진입");
+			List<GroupVO> list = null;
+			
+			
+			int count = 0;
+			
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("keyfield", keyfield);
+			map.put("keyword", keyword);
+			
+			count = groupService.selectCount(map);
+			
+			System.out.println("검색된 글의 갯수 : " + count);
+			//paging 처리
+			PagingUtil page = new PagingUtil(currentPage, count, rowCount, 10, "groupListSearch.do");
+			map.put("start", page.getStartCount());
+			map.put("end", page.getEndCount());
+			
+			//모든 그룹 list에 담기
+			list = groupService.allGroupList(map);
+			System.out.println("list에 담긴 글 목록 : " + list);
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("group/groupList_search");
+			mav.addObject("count", count);
+			mav.addObject("list", list);
+			mav.addObject("rowCount", rowCount);
+			
+			return mav;
+			
+		}
 	
 	
 	//그룹 만들기 페이지 호출
@@ -145,7 +181,7 @@ public class GroupController {
 		}
 	}
 	
-	//그룹 디테일 호출 메서드
+	//그룹 게시글 디테일 호출 메서드
 	@RequestMapping(value="/group/groupBoardDetail.do", method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView boardDetail(@RequestParam String board_num, HttpSession session) {
@@ -163,21 +199,44 @@ public class GroupController {
 		return mav;
 	}
 	
-	//채팅 입력 메서드
-	@RequestMapping(value="/group/boardSubmit.do", method=RequestMethod.POST)
+	//그룹 게시판 글 작성 페이지 호출메서드
+	@RequestMapping(value="/group/groupBoardWrite.do", method=RequestMethod.GET)
+	public ModelAndView boardWriteView(@RequestParam String group_num, HttpSession session) {
+		//게시판 글 작성 페이지 호출
+		System.out.println("게시판 작성 페이지 호출");
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		System.out.println("group_num : " + group_num);
+		GroupVO group = new GroupVO();
+		//로그인한 회원의 memnum group에 셋팅
+		group.setMem_num(member.getMem_num());
+		//페이지로 전달할 groupNum 세팅
+		group.setGroup_num(group_num);
+		//ModelAndView 객체 생성
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("group/groupBoardWrite");
+		mav.addObject("writer", group);
+		
+		return mav;
+	}
+	
+	//그룹게시판 글 작성 메서드
+	@RequestMapping(value="/group/groupBoardWrite.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String boardSubmit(@RequestParam String group_num, @RequestParam String board_content, HttpSession session) {
-		System.out.println("채팅 입력 메서드 진입");
+	public ModelAndView boardWrite(@Valid GroupVO groupVO, HttpSession session) {
+		System.out.println("게시판 글 작성 메서드 진입");
 		//로그인한 회원 정보를 user에 넣기
 		MemberVO member = (MemberVO)session.getAttribute("user");
-		GroupVO group = new GroupVO();
-		group.setMem_num(member.getMem_num());
-		group.setGroup_num(group_num);
-		group.setBoard_content(board_content);
-		groupService.insertGroup_board(group);
+		groupVO.setMem_num(member.getMem_num());
+		groupVO.setMem_id(member.getMem_id());
+		System.out.println("전달받은 내용 : " + groupVO);
+		groupService.insertGroup_board(groupVO);
 		
-		return "group/groupDetail";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("group/groupBoard_detail");
+		mav.addObject("detail", groupVO);
+		return mav;
 	}
+	
 	
 	//이미지 출력을 위한 메서드
 	@RequestMapping("/group/imageView.do")

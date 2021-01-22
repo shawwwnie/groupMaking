@@ -22,7 +22,7 @@ $(document).ready(function(){
 			
 			$.ajax({
 				type:'post',
-				data:{pageNum:pageNum},
+				data:{pageNum:currentPage},
 				url:'groupListAjax.do',
 				dataType:'json',
 				cache:false,
@@ -42,7 +42,7 @@ $(document).ready(function(){
 							var output = '<div class="container">';
 								output += '<div class="card">';
 									output += '<div class="front side">';
-										output += '<h1 calss="logo">' + item.group_name + '</h1>';
+										output += '<h1 class="logo">' + item.group_name + '</h1>';
 									output += '</div>';
 									output += '<div class="back side">';
 										output += '<h2 class="name">' + item.group_name + '</h2>';
@@ -94,12 +94,26 @@ $(document).ready(function(){
 	
 	//1페이지 호출
 	selectData(1);
-	
 });
 </script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_groupList.css">
 <div class="page_groupList">
 	<input type="button" value="그룹만들기" onClick="location.href='${pageContext.request.contextPath}/group/groupMake.do'">
+	<form action="groupListSearch.do" id="search_form" method="get">
+		<ul class="search">
+			<li>
+				<select name="keyfield" id="keyfield">
+						<option value="group_name">그룹이름</option>
+						<option value="group_admin">그룹장 아이디</option>
+						<option value="all">전체</option>
+				</select>
+			</li>
+			<li><input type="text" name="keyword" id="keyword"></li>
+			<li><input type="submit" value="찾기" style="width:60px;"> 
+			<input type="button" value="목록" onclick="location.href='groupList.do'" style="width:60px;">
+			</li>
+		</ul>
+	</form>
 	<div class="groups">
 		<div id="output">
 			<!-- ajax 영역 -->

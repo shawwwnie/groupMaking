@@ -33,6 +33,7 @@ input:checked + .slide .slide__content {
 	height: 15px;
 	
 }
+
 .slide {
   transform: translateX(-100%);
   position: absolute;
@@ -213,4 +214,4 @@ label:nth-child(13) {
 .psst a {
   color: #0096ff;
 }
-/******************* 토글메뉴 CSS **********************/
+

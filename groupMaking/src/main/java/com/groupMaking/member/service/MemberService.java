@@ -22,4 +22,7 @@ public interface MemberService {
 	//그룹 가입여부 확인 메서드
 	public MemberVO checkRegister(Map<String,Object> map);
 	
+	//블랙에 1 추가하는 메서드
+	public void updateBlack(String mem_num);
+	
 }

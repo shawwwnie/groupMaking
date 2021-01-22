@@ -51,7 +51,7 @@ public class GroupVO {
 	private Date board_limit;
 	//작성시간
 	private Date board_date;
-	
+
 	//파일 업로드 처리
 	public void setBoard_fileUpload(MultipartFile feedUpload)throws IOException{
 		//MultipartFile -> byte[] 반환
@@ -208,6 +208,8 @@ public class GroupVO {
 				+ board_filename + ", board_location=" + board_location + ", board_limit=" + board_limit
 				+ ", board_date=" + board_date + "]";
 	}
+
+	
 
 	
 	

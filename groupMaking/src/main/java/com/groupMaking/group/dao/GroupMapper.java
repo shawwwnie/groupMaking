@@ -17,7 +17,7 @@ public interface GroupMapper {
 	
 	//그룹 만들기 사이클 시작
 	//1. group_sum 테이블 입력
-	@Insert("INSERT INTO group_sum (group_num, group_admin, group_name) VALUES (#{group_num}, #{mem_num}, #{group_name})")
+	@Insert("INSERT INTO group_sum (group_num, group_admin, group_name) VALUES (#{group_num}, #{group_admin}, #{group_name})")
 	public void insertGroup_sum(GroupVO groupvo);
 	//2. group_detail 테이블 입력
 	//시작여부는 시작전으로 고정
@@ -41,17 +41,17 @@ public interface GroupMapper {
 	@Select("SELECT * FROM member_group g JOIN member m on g.mem_num = m.mem_num where mem_group = #{group_num}")
 	public List<GroupVO> selectGroup_member(String group_num);
 	
-	/********** 그룹내 채팅 관련 ***************/
+	/********** 그룹내 게시판 관련 ***************/
 	//게시판 번호 시퀀스로 받기
 	@Select("SELECT board_seq.nextval FROM dual")
 	public String selectBoard_num();
 	//게시판 작성
-	@Insert("INSERT INTO group_board (board_num, group_num, mem_num, board_title, board_content, board_file, board_location, board_limit, board_date)"
-			+ "VALUES (#{board_num}, #{group_num}, #{mem_num}, #{board_title}, #{board_content}, #{board_file}, #{board_location}, #{board_limit}, SYSDATE)")
+	@Insert("INSERT INTO group_board (board_num, group_num, mem_num, board_title, board_content, board_file, board_filename, board_location, board_limit, board_date)"
+			+ "VALUES (#{board_num}, #{group_num}, #{mem_num}, #{board_title}, #{board_content}, #{board_file}, #{board_filename}, #{board_location}, #{board_limit}, SYSDATE)")
 	public void insertGroup_board(GroupVO groupVO);
 	
 	//해당그룹의 게시판에 작성된 리스트 불러오기
-	@Select("SELECT * FROM group_board b join member m ON b.mem_num = m.mem_num WHERE b.group_num = #{group_num} ORDER BY b.board_date")
+	@Select("SELECT * FROM group_board b join member m ON b.mem_num = m.mem_num WHERE b.group_num = #{group_num} ORDER BY b.board_date DESC")
 	public List<GroupVO> selectGroup_board(String group_num);
 	
 	//게시판 디테일 불러오기

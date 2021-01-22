@@ -44,5 +44,12 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO checkRegister(Map<String, Object> map) {
 		return memberMapper.checkRegister(map);
 	}
+	//블랙에 1 추가하는 메서드
+	@Override
+	public void updateBlack(String mem_num) {
+		memberMapper.updateBlack(mem_num);
+		
+	}
+	
 
 }

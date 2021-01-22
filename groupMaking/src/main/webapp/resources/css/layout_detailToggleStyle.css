@@ -1,0 +1,95 @@
+/******************* 토글메뉴 CSS **********************/
+
+/* Important styles */
+#toggle {
+  display: inline-block;
+  width: 28px;
+  height: 30px;
+}
+
+#toggle .toggleSpan:after,
+#toggle .toggleSpan:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -9px;
+}
+#toggle .toggleSpan:after{
+  top: 9px;
+}
+#toggle .toggleSpan {
+  position: relative;
+  display: block;
+}
+
+#toggle .toggleSpan,
+#toggle .toggleSpan:after,
+#toggle .toggleSpan:before {
+  width: 100%;
+  height: 5px;
+  background-color: #888;
+  transition: all 0.3s;
+  backface-visibility: hidden;
+  border-radius: 2px;
+}
+
+/* on activation */
+#toggle.on .toggleSpan {
+  background-color: transparent;
+}
+#toggle.on .toggleSpan:before {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+#toggle.on .toggleSpan:after {
+  transform: rotate(-45deg) translate(7px, -8px);
+}
+#toggle.on + #menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* menu appearance*/
+#menu {
+  position: relative;
+  color: #999;
+  width: 40%;
+  max-width: 130px;
+  margin: inherit;
+  margin-left: 20%;
+  font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
+  border-radius: 4px;
+  background: white;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  /* just for this demo */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .4s;
+}
+
+#menu:after {
+  position: absolute;
+  top: -15px;
+  left: 95px;
+  content: "";
+  display: block;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 20px solid white;
+}
+.inMenuUl, .inMenuLi, .inMenuLi .inMenuA {
+  list-style: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.inMenuLi .inMenuA {
+  padding: 5px;
+  color: #888;
+  text-decoration: none;
+  transition: all .2s;
+}
+.inMenuLi .inMenuA:hover,
+.inMenuLi .inMenuA:focus {
+  background: #1ABC9C;
+  color: #fff;
+}
