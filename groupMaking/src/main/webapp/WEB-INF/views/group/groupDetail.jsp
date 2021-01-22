@@ -139,6 +139,7 @@ $(document).ready(function(){
     <div class="slide__content">
       <h1>그룹관리</h1>
       <p>그룹 관리 넣기</p>
+      <p><a href="/main/group/groupExit.do?group_num=${group.group_num}&mem_num=${user.mem_num}">그룹 탈퇴</a></p>
       
     </div>  
   </div>

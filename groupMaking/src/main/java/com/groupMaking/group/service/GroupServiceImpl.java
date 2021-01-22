@@ -86,6 +86,11 @@ public class GroupServiceImpl implements GroupService{
 		System.out.println("그룹 디테일 불러오는 메서드 진입");
 		return groupMapper.selectBoard_detail(board_num);
 	}
+
+	@Override
+	public void groupExit(GroupVO groupVO) {
+		groupMapper.groupExit(groupVO);
+	}
 	
 	
 	

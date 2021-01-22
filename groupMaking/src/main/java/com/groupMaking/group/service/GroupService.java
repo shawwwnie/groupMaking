@@ -28,6 +28,9 @@ public interface GroupService {
 	/*게시판 입력관련 사이클 묶기(보드 번호 받기 + 보드 내용 작성)*/
 	public void insertGroup_board(GroupVO groupVO);
 	
+	//그룹 탈퇴 메서드
+	public void groupExit(GroupVO groupVO);
+	
 	//게시판 내용 불러오기
 	public List<GroupVO> selectGroup_board(String group_num);
 	

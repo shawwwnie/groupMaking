@@ -48,7 +48,7 @@ public class GroupController {
 	//그룹 목록 불러오기
 	@RequestMapping("/group/groupListAjax.do")
 	@ResponseBody
-	public Map<String,Object> getGroupList(@RequestParam(value="pageNum",defaultValue="1") int currentPage, HttpSession session, Model model){
+	public Map<String,Object> getGroupList(@RequestParam(value="pageNum",defaultValue="1") int currentPage, HttpSession session){
 		System.out.println("목록불러오기 ajax 진입");
 		List<GroupVO> list = null;
 		
@@ -77,45 +77,58 @@ public class GroupController {
 		return hashMap;
 		
 	}
+	
+	//그룹 탈퇴하는 메서드
+	@RequestMapping(value="/group/groupExit.do", method=RequestMethod.GET)
+	public String groupExit(@RequestParam String group_num, String mem_num){
+		System.out.println("그룹 탈퇴 메서드 진입");
+		//매개변수 그룹VO
+		GroupVO groupVO = new GroupVO();
+		groupVO.setMem_num(mem_num);
+		groupVO.setMem_group(group_num);
+		
+		groupService.groupExit(groupVO);
+		return "group/groupList";
+	}
 	//그룹 검색목록 불러오기
-		@RequestMapping("/group/groupListSearch.do")
-		@ResponseBody
-		public ModelAndView getGroupListSearch(@RequestParam(value="pageNum",defaultValue="1") int currentPage, 
-				@RequestParam(value="keyfield",defaultValue="") String keyfield,
-				@RequestParam(value="keyword",defaultValue="") String keyword,
-				@RequestParam(value="rowCount",defaultValue="10") int rowCount,
-				HttpSession session, Model model){
-			System.out.println("검색 목록불러오기 메서드 진입");
-			List<GroupVO> list = null;
-			
-			
-			int count = 0;
-			
-			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("keyfield", keyfield);
-			map.put("keyword", keyword);
-			
-			count = groupService.selectCount(map);
-			
-			System.out.println("검색된 글의 갯수 : " + count);
-			//paging 처리
-			PagingUtil page = new PagingUtil(currentPage, count, rowCount, 10, "groupListSearch.do");
-			map.put("start", page.getStartCount());
-			map.put("end", page.getEndCount());
-			
-			//모든 그룹 list에 담기
-			list = groupService.allGroupList(map);
-			System.out.println("list에 담긴 글 목록 : " + list);
-			
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("group/groupList_search");
-			mav.addObject("count", count);
-			mav.addObject("list", list);
-			mav.addObject("rowCount", rowCount);
-			
-			return mav;
-			
-		}
+	@RequestMapping("/group/groupListSearch.do")
+	@ResponseBody
+	public ModelAndView getGroupListSearch(@RequestParam(value="pageNum",defaultValue="1") int currentPage, 
+			@RequestParam(value="keyfield",defaultValue="") String keyfield,
+			@RequestParam(value="keyword",defaultValue="") String keyword,
+			@RequestParam(value="rowCount",defaultValue="10") int rowCount,
+			HttpSession session, Model model){
+		System.out.println("검색 목록불러오기 메서드 진입");
+		List<GroupVO> list = null;
+		
+		
+		int count = 0;
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		count = groupService.selectCount(map);
+		
+		System.out.println("검색된 글의 갯수 : " + count);
+		//paging 처리
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 10, "groupListSearch.do");
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+		
+		//모든 그룹 list에 담기
+		list = groupService.allGroupList(map);
+		System.out.println("list에 담긴 글 목록 : " + list);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("group/groupList_search");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("rowCount", rowCount);
+		
+		return mav;
+		
+	}
 	
 	
 	//그룹 만들기 페이지 호출
@@ -236,6 +249,7 @@ public class GroupController {
 		mav.addObject("detail", groupVO);
 		return mav;
 	}
+	
 	
 	
 	//이미지 출력을 위한 메서드

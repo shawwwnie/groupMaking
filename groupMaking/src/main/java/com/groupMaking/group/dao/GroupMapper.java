@@ -3,6 +3,7 @@ package com.groupMaking.group.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -41,6 +42,10 @@ public interface GroupMapper {
 	@Select("SELECT * FROM member_group g JOIN member m on g.mem_num = m.mem_num where mem_group = #{group_num}")
 	public List<GroupVO> selectGroup_member(String group_num);
 	
+	/********** 그룹 탈퇴하기 ***************/
+	@Delete("DELETE FROM member_group WHERE mem_num=#{mem_num} AND mem_group=#{mem_group}")
+	public void groupExit(GroupVO groupVO);
+	
 	/********** 그룹내 게시판 관련 ***************/
 	//게시판 번호 시퀀스로 받기
 	@Select("SELECT board_seq.nextval FROM dual")
@@ -57,4 +62,5 @@ public interface GroupMapper {
 	//게시판 디테일 불러오기
 	@Select("SELECT * FROM group_board b join member m ON b.mem_num = m.mem_num WHERE b.board_num = #{board_num}")
 	public GroupVO selectBoard_detail(String board_num);
+	
 }
